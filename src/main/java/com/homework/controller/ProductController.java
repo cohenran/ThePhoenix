@@ -1,6 +1,7 @@
 package com.homework.controller;
 
 import com.homework.model.ProductEntity;
+import com.homework.model.PropertiesEntity;
 import com.homework.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class ProductController {
 	/**
 	 * Creating a new product to buy
 	 *
-	 * @param id         the product ID to be bought
 	 * @param properties the properties of the product
 	 * @return the product
 	 */
@@ -32,7 +32,8 @@ public class ProductController {
 			@RequestParam(required = true,
 					name = "properties")
 					List<String> properties) {
-		return productService.buyNewProduct(properties);
+		PropertiesEntity propertiesEntity = new PropertiesEntity(properties);
+		return productService.buyNewProduct(propertiesEntity);
 	}
 
 	/**
@@ -53,6 +54,7 @@ public class ProductController {
 			@RequestParam(required = true,
 					name = "properties")
 					List<String> properties) {
-		return productService.updateProdcuts(id, properties);
+		PropertiesEntity propertiesEntity = new PropertiesEntity(properties);
+		return productService.updateProdcuts(id, propertiesEntity);
 	}
 }

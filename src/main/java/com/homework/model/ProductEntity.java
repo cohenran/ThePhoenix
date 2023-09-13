@@ -1,6 +1,7 @@
 package com.homework.model;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
@@ -16,7 +17,7 @@ public class ProductEntity {
 	private Integer id;
 
 	@NonNull
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "properties")
 	private PropertiesEntity properties;
 }

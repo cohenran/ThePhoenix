@@ -43,9 +43,9 @@ public class ClientControllerTest {
 		ClientEntity clientEntity = createClient(true, "SMS", "0524123456");
 		
 		Set<ProductEntity> productEntities = new HashSet<>();
-		productEntities.add(productService.buyNewProduct(Arrays.asList("TV", "23Inch")));
-		productEntities.add(productService.buyNewProduct(Arrays.asList("TV", "24Inch")));
-		productEntities.add(productService.buyNewProduct(Arrays.asList("Basketball")));
+		productEntities.add(productService.buyNewProduct(new PropertiesEntity(Arrays.asList("TV", "23Inch"))));
+		productEntities.add(productService.buyNewProduct(new PropertiesEntity(Arrays.asList("TV", "24Inch"))));
+		productEntities.add(productService.buyNewProduct(new PropertiesEntity(Arrays.asList("Basketball"))));
 		
 		productEntities.forEach(p -> productService.buyNewProduct(p));
 		

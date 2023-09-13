@@ -7,6 +7,7 @@ import com.homework.model.PropertiesEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,20 +18,21 @@ public class ProductService {
 	@Resource
 	private PropertiesRepository propertiesRepository;
 
-	public ProductEntity buyNewProduct(List<String> properties) {
-		PropertiesEntity propertiesEntity = saveProperties(properties);
-
+	public ProductEntity buyNewProduct(PropertiesEntity propertiesEntity) {
+		propertiesEntity = propertiesRepository.save(propertiesEntity);
+		
 		ProductEntity productEntity = new ProductEntity(propertiesEntity);
 
-		return buyNewProduct(productEntity);
+		productEntity = buyNewProduct(productEntity);
+		return productEntity;
 	}
 
 	public ProductEntity buyNewProduct(ProductEntity productEntity) {
 		return productRepository.save(productEntity);
 	}
 
-	public ProductEntity updateProdcuts(Integer id, List<String> properties) {
-		PropertiesEntity propertiesEntity = saveProperties(properties);
+	public ProductEntity updateProdcuts(Integer id, PropertiesEntity propertiesEntity) {
+		propertiesEntity = saveProperties(propertiesEntity);
 
 		Optional<ProductEntity> productEntityOpt = productRepository.findById(id);
 
@@ -41,13 +43,12 @@ public class ProductService {
 		ProductEntity productEntity = productEntityOpt.get();
 		productRepository.delete(productEntity);
 
-		productEntity.setProperties(propertiesEntity);
+		ProductEntity newProductEntity = new ProductEntity(propertiesEntity);
 
-		return productRepository.save(productEntity);
+		return productRepository.save(newProductEntity);
 	}
 
-	private PropertiesEntity saveProperties(List<String> properties) {
-		PropertiesEntity propertiesEntity = new PropertiesEntity(properties);
+	private PropertiesEntity saveProperties(PropertiesEntity propertiesEntity) {
 		propertiesEntity = propertiesRepository.save(propertiesEntity);
 
 		return propertiesEntity;
