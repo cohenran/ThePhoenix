@@ -22,10 +22,14 @@ public class ProductService {
 
 		ProductEntity productEntity = new ProductEntity(propertiesEntity);
 
+		return buyNewProduct(productEntity);
+	}
+
+	public ProductEntity buyNewProduct(ProductEntity productEntity) {
 		return productRepository.save(productEntity);
 	}
 
-	public ProductEntity updateProcuts(Integer id, List<String> properties) {
+	public ProductEntity updateProdcuts(Integer id, List<String> properties) {
 		PropertiesEntity propertiesEntity = saveProperties(properties);
 
 		Optional<ProductEntity> productEntityOpt = productRepository.findById(id);

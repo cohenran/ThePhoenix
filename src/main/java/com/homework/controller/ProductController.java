@@ -53,6 +53,6 @@ public class ProductController {
 			@RequestParam(required = true,
 					name = "properties")
 					List<String> properties) {
-		return productService.updateProcuts(id, properties);
+		return productService.updateProdcuts(id, properties);
 	}
 }

@@ -23,7 +23,7 @@ public class ClientEntity {
 	@NonNull
 	@OneToOne
 	@JoinColumn(name = "authentication_method_id")
-	private AuthenticationMethod authenticationMethod;
+	private AuthenticationMethodEntity authenticationMethod;
 
 	@OneToMany(fetch = FetchType.EAGER,
 			cascade = CascadeType.ALL)

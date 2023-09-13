@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class AuthenticationMethod {
+public class AuthenticationMethodEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -20,6 +20,6 @@ public class AuthenticationMethod {
 	private String authenticationMethodType;
 
 	@NonNull
-	@Column(name = "method_value")
-	private String methodValue;
+	@Column(name = "authentication_method_value")
+	private String authenticationMethodValue;
 }

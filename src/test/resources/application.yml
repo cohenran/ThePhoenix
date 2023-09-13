@@ -1,0 +1,36 @@
+h2:
+  service:
+    database: THE_PHOENIX
+    port: 3306
+    local:
+      name: localhost
+      username: sa
+      password: password
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MySQL
+    username: ${h2.service.local.username}
+    password: ${h2.service.local.password}    
+
+  jpa:
+    database: default
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    properties:
+      hibernate:
+        show-sql: false
+
+  http:
+    converters:
+      preferred-json-mapper: gson
+
+server:
+  connection-timeout: 1200000
+  servlet:
+    context-path: /the_phoenix
+  port: 12345

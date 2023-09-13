@@ -1,7 +1,8 @@
 package com.homework.services;
 
+import com.homework.dal.AuthenticationMethodRepository;
 import com.homework.dal.ClientRepository;
-import com.homework.model.AuthenticationMethod;
+import com.homework.model.AuthenticationMethodEntity;
 import com.homework.model.ClientEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,13 @@ import java.util.Optional;
 public class ClientService {
 	@Resource
 	private ClientRepository clientRepository;
+	@Resource
+	private AuthenticationMethodRepository authenticationMethodRepository;
 
-	public ClientEntity createClient(Boolean isAuthorized, AuthenticationMethod authenticationMethod) {
-		ClientEntity clientEntity = new ClientEntity(isAuthorized, authenticationMethod);
+	public ClientEntity createClient(Boolean isAuthorized, String authenticationMethodType, String authenticationMethodValue) {
+		AuthenticationMethodEntity authenticationMethodEntity = new AuthenticationMethodEntity(authenticationMethodType, authenticationMethodValue);
+		authenticationMethodEntity = authenticationMethodRepository.save(authenticationMethodEntity);
+		ClientEntity clientEntity = new ClientEntity(isAuthorized, authenticationMethodEntity);
 
 		return clientRepository.save(clientEntity);
 	}
@@ -27,5 +32,9 @@ public class ClientService {
 		}
 
 		return clientEntityOpt.get();
+	}
+
+	public ClientEntity updateClient(ClientEntity clientEntity) {
+		return clientRepository.save(clientEntity);
 	}
 }
