@@ -3,8 +3,7 @@ package com.homework.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Properties;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,13 +11,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class ProductEntity {
+public class PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NonNull
-	@ManyToOne
-	@JoinColumn(name = "properties")
-	private PropertiesEntity properties;
+	@Column(name = "properties")
+	@ElementCollection
+	private List<String> properties;
 }

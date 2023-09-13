@@ -1,0 +1,37 @@
+mysql:
+  service:
+    database: the_phoenix
+    port: 3306
+    additional: useUnicode=true&characterEncoding=UTF-8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&autoReconnect=true
+    local:
+      name: localhost
+      username: root
+      password: Aa123456
+#    remote:
+#      name: <IP>
+#      username: <username>
+#      password: <password>
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${mysql.service.local.name}:${mysql.service.port}/${mysql.service.database}?${mysql.service.additional}
+    username: ${mysql.service.local.username}
+    password: ${mysql.service.local.password}
+    
+
+  jpa:
+    database: default
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  http:
+    converters:
+      preferred-json-mapper: gson
+
+server:
+  connection-timeout: 1200000
+  servlet:
+    context-path: /the_phoenix
+  port: 12345
