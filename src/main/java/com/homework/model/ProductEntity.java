@@ -3,8 +3,6 @@ package com.homework.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Properties;
-import java.util.Set;
 
 @Data
 @Entity
@@ -16,7 +14,7 @@ public class ProductEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NonNull
 	@ManyToOne
 	@JoinColumn(name = "properties")

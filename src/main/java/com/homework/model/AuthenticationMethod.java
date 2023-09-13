@@ -1,24 +1,25 @@
 package com.homework.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "authentication")
+@Table(name = "authentication_method")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Authentication {
+@RequiredArgsConstructor
+public class AuthenticationMethod {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NonNull
 	@Column(name = "authentication_method_type")
 	private String authenticationMethodType;
 
+	@NonNull
 	@Column(name = "method_value")
 	private String methodValue;
 }

@@ -1,6 +1,5 @@
 package com.homework.controller;
 
-import com.homework.model.ClientEntity;
 import com.homework.model.ProductEntity;
 import com.homework.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,26 +19,40 @@ public class ProductController {
 
 	/**
 	 * Creating a new product to buy
-	 * @param id the product ID to be bought
+	 *
+	 * @param id         the product ID to be bought
 	 * @param properties the properties of the product
 	 * @return the product
 	 */
-	@RequestMapping(value = "/buy_new_product", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value = "/buy_new_product",
+			method = RequestMethod.GET,
+			produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
-	public ProductEntity buyNewProduct(@RequestParam(required = true, name = "properties") List<String> properties) {
+	public ProductEntity buyNewProduct(
+			@RequestParam(required = true,
+					name = "properties")
+					List<String> properties) {
 		return productService.buyNewProduct(properties);
 	}
 
 	/**
 	 * Creating a new product to buy
-	 * @param id the product ID to be updated
-	 * @param properties the updated properties of the product                       
+	 *
+	 * @param id         the product ID to be updated
+	 * @param properties the updated properties of the product
 	 * @return the product
 	 */
-	@RequestMapping(value = "/update_product", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value = "/update_product",
+			method = RequestMethod.GET,
+			produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseStatus(HttpStatus.OK)
-	public ProductEntity updateProducts(@RequestParam(required = true, name = "id") Integer id,
-										@RequestParam(required = true, name = "properties") List<String> properties) {
+	public ProductEntity updateProducts(
+			@RequestParam(required = true,
+					name = "id")
+					Integer id,
+			@RequestParam(required = true,
+					name = "properties")
+					List<String> properties) {
 		return productService.updateProcuts(id, properties);
 	}
 }

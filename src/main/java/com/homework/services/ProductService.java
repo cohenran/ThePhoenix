@@ -16,36 +16,36 @@ public class ProductService {
 	private ProductRepository productRepository;
 	@Resource
 	private PropertiesRepository propertiesRepository;
-	
+
 	public ProductEntity buyNewProduct(List<String> properties) {
 		PropertiesEntity propertiesEntity = saveProperties(properties);
-		
+
 		ProductEntity productEntity = new ProductEntity(propertiesEntity);
-		
+
 		return productRepository.save(productEntity);
 	}
 
 	public ProductEntity updateProcuts(Integer id, List<String> properties) {
 		PropertiesEntity propertiesEntity = saveProperties(properties);
-		
+
 		Optional<ProductEntity> productEntityOpt = productRepository.findById(id);
-		
+
 		if (productEntityOpt.isEmpty()) {
 			throw new RuntimeException("NO SUCH PRODUCT!");
 		}
 
 		ProductEntity productEntity = productEntityOpt.get();
 		productRepository.delete(productEntity);
-		
+
 		productEntity.setProperties(propertiesEntity);
-		
+
 		return productRepository.save(productEntity);
 	}
 
 	private PropertiesEntity saveProperties(List<String> properties) {
 		PropertiesEntity propertiesEntity = new PropertiesEntity(properties);
 		propertiesEntity = propertiesRepository.save(propertiesEntity);
-		
+
 		return propertiesEntity;
 	}
 }

@@ -1,9 +1,6 @@
 package com.homework.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,17 +10,22 @@ import java.util.Set;
 @Table(name = "client")
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class ClientEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@NonNull
-	@OneToOne
-	@JoinColumn(name = "authentication_id")
-	private Authentication authentication;
+	@Column(name = "is_authorized")
+	private Boolean isAuthorized;
 
-	@OneToMany
-	@JoinColumn(name = "product_id")
+	@NonNull
+	@OneToOne
+	@JoinColumn(name = "authentication_method_id")
+	private AuthenticationMethod authenticationMethod;
+
+	@OneToMany(fetch = FetchType.EAGER,
+			cascade = CascadeType.ALL)
 	private Set<ProductEntity> products;
 }

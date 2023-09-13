@@ -17,8 +17,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://${mysql.service.local.name}:${mysql.service.port}/${mysql.service.database}?${mysql.service.additional}
     username: ${mysql.service.local.username}
-    password: ${mysql.service.local.password}
-    
+    password: ${mysql.service.local.password}    
 
   jpa:
     database: default
